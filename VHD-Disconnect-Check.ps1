@@ -37,20 +37,17 @@ $DismountVHDs = $activDISKS | where {$connectedRDSUsers -notcontains $psitem}
 if ($DismountVHDs) 
     
     {
-    #$cred = Get-Credential
-    #$cred | Export-CliXml C:\scripts\ForAlerting_by_Anish\cred.clixml
-    $cred = Import-CliXml "C:\scripts\ForAlerting_by_Anish\cred.clixml"
 
     ##############################################################################
-    $From = "anish.madassery@igeeks.ch"
-    $To = "anish.madassery@igeeks.ch"
-    $Cc = "alerts.critical@igeeks.ch"
-    $Attachments = "C:\scripts\ForAlerting_by_Anish\MAH Workaround - Example.png"
+    $From = "email@email.com"
+    $To = "email@email.com"
+    $Cc = "email@email.com"
+    $Attachments = "C:\scripts\ForAlerting\MAH Workaround - Example.png"
     $Subject = "ALERT: MAH-SVR-101 -> ODFC disk could not be removed."
     $Body = "The following Disks could not be removed from the server:
 $DismountVHDs
 Workaround: Log in to the RDS server and open Disk Manager: Selects the VHDX mentioned in the alert e-mail and disconnects it from the system. The name of the VHDX always starts with ODFC_ as shown in the example."
-    $SMTPServer = "mail.igeeks.ch"
+    $SMTPServer = "mail server"
     $SMTPPort = "587"
     Send-MailMessage -From $From -to $To -Cc $Cc -Subject $Subject `
     -Body $Body -SmtpServer $SMTPServer -port $SMTPPort -Attachments $Attachments `
